@@ -121,7 +121,7 @@ export interface ILogger {
 
 
 interface LogInfo {
-    timestamp: string;
-    level: string;
-    message: string;
+    timestamp: string
+    level: string
+    message: string
 }

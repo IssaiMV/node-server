@@ -11,6 +11,13 @@ export abstract class Default {
     public static readonly PORT_HTTP: number = 80
     public static readonly PORT_HTTPS: number = 443
 
+    // Microsoft SQL Server
+    public static readonly DB_ENGINE: string = 'postgres'
+    public static readonly DB_HOST_URI: string = 'localhost'
+    public static readonly DB_HOST_URI_TEST: string = 'localhost'
+    public static readonly DB_PORT: number = 5432
+
+
 
     // Log
     public static readonly LOG_DIR: string = 'logs'

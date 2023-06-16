@@ -1,9 +1,9 @@
 import HttpStatus from 'http-status-codes'
 import { controller, httpGet, request, response } from 'inversify-express-utils'
 import { Request, Response } from 'express'
-import { inject } from 'inversify';
-import { Identifier } from '../../di/identifiers';
-import { ILogger } from '../../utils/custom.logger';
+import { inject } from 'inversify'
+import { Identifier } from '../../di/identifiers'
+import { ILogger } from '../../utils/custom.logger'
 
 /**
  * Controller that implements Home feature operations.
@@ -32,7 +32,7 @@ export class HomeController {
      */
     @httpGet('/')
     public getReference(@request() _req: Request, @response() res: Response) {
-        this._logger.debug('Home Controller');
+        this._logger.debug('Home Controller')
         return res.status(HttpStatus.OK).send('Hola')
     }
 }

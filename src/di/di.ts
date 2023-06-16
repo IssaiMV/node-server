@@ -4,6 +4,11 @@ import { CustomLogger, ILogger } from '../utils/custom.logger'
 import { Identifier } from './identifiers'
 import { Index } from '..'
 import { HomeController } from '../ui/controllers/home.controller'
+import { IConnectionFactory } from '../infrastructure/port/connection.factory.interface'
+import { PgConnectionFactory } from '../infrastructure/database/pg.connection.factory'
+import { IDBConnection } from '../infrastructure/port/db.connection.interface'
+import { PgConnection } from '../infrastructure/database/pg.connection'
+import { BackgroundService } from '../background/background.service'
 
 export class DI {
     private static instance: DI
@@ -50,6 +55,19 @@ export class DI {
 
         // Controllers
         this.container.bind<HomeController>(Identifier.HOME_CONTROLLER).to(HomeController).inSingletonScope()
+
+        // Background Services
+        this.container
+            .bind(Identifier.BACKGROUND_SERVICE)
+            .to(BackgroundService).inSingletonScope()
+
+        this.container
+            .bind<IConnectionFactory>(Identifier.PG_CONNECTION_FACTORY)
+            .to(PgConnectionFactory).inSingletonScope()
+        this.container
+            .bind<IDBConnection>(Identifier.PG_CONNECTION)
+            .to(PgConnection).inSingletonScope()
+
 
 
         // Log
