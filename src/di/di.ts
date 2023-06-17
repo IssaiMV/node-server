@@ -9,6 +9,15 @@ import { PgConnectionFactory } from '../infrastructure/database/pg.connection.fa
 import { IDBConnection } from '../infrastructure/port/db.connection.interface'
 import { PgConnection } from '../infrastructure/database/pg.connection'
 import { BackgroundService } from '../background/background.service'
+import { UserEntityMapper } from '../infrastructure/entity/mapper/user.entity.mapper'
+import { User } from '../application/domain/model/user'
+import { UserEntity } from '../infrastructure/entity/user.entity'
+import { IEntityMapper } from '../infrastructure/entity/mapper/entity.mapper.interface'
+import { IUserRepository } from '../infrastructure/port/user.repository.interface'
+import { UserRepository } from '../infrastructure/repository/user.repository'
+import { UserService } from '../application/service/user.service'
+import { IUserService } from '../application/port/user.service.interface'
+import { UserController } from '../ui/controllers/user.controller'
 
 export class DI {
     private static instance: DI
@@ -55,6 +64,23 @@ export class DI {
 
         // Controllers
         this.container.bind<HomeController>(Identifier.HOME_CONTROLLER).to(HomeController).inSingletonScope()
+        this.container.bind<UserController>(Identifier.USER_CONTROLLER).to(UserController).inSingletonScope()
+
+        // Services
+        this.container.bind<IUserService>(Identifier.USER_SERVICE).to(UserService).inSingletonScope()
+
+        // Repositories
+        this.container
+            .bind<IUserRepository>(Identifier.USER_REPOSITORY)
+            .to(UserRepository).inSingletonScope()
+
+        // Models
+        this.container.bind(Identifier.USER_ENTITY).toConstantValue(UserEntity)
+
+        // Mappers
+        this.container
+            .bind<IEntityMapper<User, UserEntity>>(Identifier.USER_ENTITY_MAPPER)
+            .to(UserEntityMapper).inSingletonScope()
 
         // Background Services
         this.container

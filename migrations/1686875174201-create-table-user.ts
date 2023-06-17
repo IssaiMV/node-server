@@ -32,12 +32,14 @@ export class CreateTableUser1686875174201 implements MigrationInterface {
                 {
                     name: 'created_at',
                     type: 'timestamp',
+                    default: 'CURRENT_TIMESTAMP',
                     isPrimary: false,
                     isNullable: true
                 },
                 {
                     name: 'updated_at',
                     type: 'timestamp',
+                    default: 'CURRENT_TIMESTAMP',
                     isPrimary: false,
                     isNullable: true
                 },
